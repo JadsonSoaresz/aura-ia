@@ -1,0 +1,10 @@
+project_id = "xylipajrdvosbyhppvqt"
+
+[functions.recommend]
+verify_jwt = false
+
+[functions.chat]
+verify_jwt = false
+
+[functions.analyze-performance]
+verify_jwt = false

@@ -99,3 +99,56 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Acessibilidade: Tamanhos de Fonte */
+html[data-font-size="pequeno"] {
+  font-size: 14px;
+}
+
+html[data-font-size="médio"] {
+  font-size: 16px;
+}
+
+html[data-font-size="grande"] {
+  font-size: 18px;
+}
+
+html[data-font-size="extra-grande"] {
+  font-size: 22px;
+}
+
+/* Acessibilidade: Alto Contraste */
+.high-contrast {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 60 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 280 100% 70%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 90%;
+  --accent: 120 100% 50%;
+  --accent-foreground: 0 0% 0%;
+  --border: 0 0% 100%;
+  --input: 0 0% 100%;
+}
+
+/* Foco visível para navegação por teclado */
+*:focus-visible {
+  outline: 3px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Melhorias de legibilidade */
+p, li, td, th {
+  line-height: 1.6;
+}
+
+/* Transições suaves para mudanças de tema */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
