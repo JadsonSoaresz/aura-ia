@@ -8,6 +8,7 @@ import Triagem from "./pages/Triagem";
 import Aprender from "./pages/Aprender";
 import Chat from "./pages/Chat";
 import Progresso from "./pages/Progresso";
+import VideoAulas from "./pages/VideoAulas";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/aprender" element={<Aprender />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/progresso" element={<Progresso />} />
+          <Route path="/videoaulas" element={<VideoAulas />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

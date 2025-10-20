@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, ClipboardList, BookOpen, MessageSquare, TrendingUp } from "lucide-react";
+import { Home, ClipboardList, BookOpen, MessageSquare, TrendingUp, Video } from "lucide-react";
 
 const Navbar = () => {
   const location = useLocation();
@@ -8,6 +8,7 @@ const Navbar = () => {
     { path: "/", label: "Início", icon: Home },
     { path: "/triagem", label: "Perfil", icon: ClipboardList },
     { path: "/aprender", label: "Aprender", icon: BookOpen },
+    { path: "/videoaulas", label: "Vídeo Aulas", icon: Video },
     { path: "/chat", label: "Chat IA", icon: MessageSquare },
     { path: "/progresso", label: "Progresso", icon: TrendingUp },
   ];
