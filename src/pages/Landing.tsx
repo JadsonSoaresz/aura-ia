@@ -12,10 +12,12 @@ import {
   ArrowRight
 } from "lucide-react";
 import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
+import Navbar from "@/components/Navbar";
 
 export default function Landing() {
   return (
     <div className="min-h-screen bg-gradient-hero">
+      <Navbar />
       <AccessibilityToolbar />
       
       <main className="container mx-auto px-4 py-12">
