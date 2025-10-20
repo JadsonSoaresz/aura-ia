@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
 import Navbar from "@/components/Navbar";
 import { VIDEO_LIBRARY, getAllSubjects, getVideosBySubject, VideoLesson } from "@/lib/videoLibrary";
 import { Play, Clock, BookOpen } from "lucide-react";
@@ -20,7 +19,6 @@ export default function VideoAulas() {
     return (
       <div className="min-h-screen bg-gradient-hero">
         <Navbar />
-        <AccessibilityToolbar />
         <main className="container mx-auto px-4 py-12 max-w-6xl">
           <Button 
             onClick={() => setSelectedVideo(null)} 
@@ -83,7 +81,6 @@ export default function VideoAulas() {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Navbar />
-      <AccessibilityToolbar />
       
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         <div className="mb-8">

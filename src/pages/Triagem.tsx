@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSessionProfile } from "@/hooks/useSessionProfile";
-import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
 import Navbar from "@/components/Navbar";
 import { LearningFormat, DifficultyLevel, SupportType } from "@/types/profile";
 import { ArrowRight, ArrowLeft } from "lucide-react";
@@ -55,7 +54,6 @@ export default function Triagem() {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Navbar />
-      <AccessibilityToolbar />
       
       <main className="container mx-auto px-4 py-12 max-w-3xl">
         <div className="mb-8">

@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
 import Navbar from "@/components/Navbar";
 import { useSessionProfile } from "@/hooks/useSessionProfile";
 import { supabase } from "@/integrations/supabase/client";
@@ -105,7 +104,6 @@ export default function Chat() {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Navbar />
-      <AccessibilityToolbar />
       
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="flex items-center gap-4 mb-6">

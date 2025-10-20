@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
 import Navbar from "@/components/Navbar";
 import { useSessionProfile } from "@/hooks/useSessionProfile";
 import { supabase } from "@/integrations/supabase/client";
@@ -72,7 +71,6 @@ export default function Aprender() {
     return (
       <div className="min-h-screen bg-gradient-hero">
         <Navbar />
-        <AccessibilityToolbar />
         <main className="container mx-auto px-4 py-12 max-w-4xl">
           <Card>
             <CardHeader>
@@ -132,7 +130,6 @@ export default function Aprender() {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Navbar />
-      <AccessibilityToolbar />
       
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         <div className="flex justify-between items-center mb-8">

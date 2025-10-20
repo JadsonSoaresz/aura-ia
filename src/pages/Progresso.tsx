@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
 import Navbar from "@/components/Navbar";
 import { useSessionProfile } from "@/hooks/useSessionProfile";
 import { supabase } from "@/integrations/supabase/client";
@@ -60,7 +59,6 @@ export default function Progresso() {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Navbar />
-      <AccessibilityToolbar />
       
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         <div className="flex items-center gap-4 mb-8">
