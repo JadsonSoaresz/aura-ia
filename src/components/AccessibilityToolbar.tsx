@@ -7,7 +7,8 @@ import {
   Keyboard,
   Settings,
   Play,
-  Pause
+  Pause,
+  BookOpen
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -49,8 +50,31 @@ export const AccessibilityToolbar = () => {
       Botão 2: Ativar ou desativar alto contraste. Atalho: Alt + 2.
       Botão 3: Ajustar tamanho da fonte. Atalho: Alt + 3.
       Botão 4: Modo de navegação por teclado. Atalho: Alt + 4.
+      Botão 5: Ler todo o conteúdo da página. Atalho: Alt + 5.
       Pressione Escape para parar a narração a qualquer momento.`;
     speak(helpText);
+  };
+
+  const readPageContent = () => {
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+      // Get all text content from headings, paragraphs, and buttons
+      const headings = Array.from(mainContent.querySelectorAll('h1, h2, h3, h4, h5, h6'))
+        .map(el => el.textContent?.trim())
+        .filter(Boolean);
+      
+      const paragraphs = Array.from(mainContent.querySelectorAll('p'))
+        .map(el => el.textContent?.trim())
+        .filter(Boolean);
+      
+      const content = [...headings, ...paragraphs].join('. ');
+      
+      if (content) {
+        speak(`Lendo conteúdo da página. ${content}`);
+      } else {
+        speak('Nenhum conteúdo encontrado para ler.');
+      }
+    }
   };
 
   const toggleKeyboardMode = () => {
@@ -150,6 +174,17 @@ export const AccessibilityToolbar = () => {
         onMouseEnter={() => profile.ttsEnabled && speak("Botão de navegação por teclado")}
       >
         <Keyboard className="h-5 w-5" />
+      </Button>
+
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={readPageContent}
+        aria-label="Ler conteúdo da página. Atalho: Alt + 5"
+        title="Ler página (Alt+5)"
+        onMouseEnter={() => profile.ttsEnabled && speak("Botão para ler todo o conteúdo da página")}
+      >
+        <BookOpen className="h-5 w-5" />
       </Button>
 
       <DropdownMenu>

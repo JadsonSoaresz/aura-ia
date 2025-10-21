@@ -52,6 +52,24 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
       speak(newValue ? "Modo teclado ativado" : "Modo teclado desativado");
       toast.success(newValue ? "Modo teclado ativado" : "Modo teclado desativado");
     },
+    'Alt+5': () => {
+      const mainContent = document.querySelector('main');
+      if (mainContent) {
+        const headings = Array.from(mainContent.querySelectorAll('h1, h2, h3, h4, h5, h6'))
+          .map(el => el.textContent?.trim())
+          .filter(Boolean);
+        
+        const paragraphs = Array.from(mainContent.querySelectorAll('p'))
+          .map(el => el.textContent?.trim())
+          .filter(Boolean);
+        
+        const content = [...headings, ...paragraphs].join('. ');
+        
+        if (content) {
+          speak(`Lendo conteúdo da página. ${content}`);
+        }
+      }
+    },
     'Escape': () => {
       stop();
     },
@@ -61,6 +79,7 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
         Alt + 2: Alternar alto contraste.
         Alt + 3: Mudar tamanho da fonte.
         Alt + 4: Alternar modo teclado.
+        Alt + 5: Ler conteúdo da página.
         Escape: Parar narração.
         Alt + H: Ouvir ajuda.`;
       speak(helpText);
