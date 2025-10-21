@@ -1,8 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, ClipboardList, BookOpen, MessageSquare, TrendingUp, Video } from "lucide-react";
+import { useAccessibility } from "@/contexts/AccessibilityContext";
 
 const Navbar = () => {
   const location = useLocation();
+  const { speak, profile } = useAccessibility();
+
+  const handleLinkHover = (text: string) => {
+    if (profile.ttsEnabled) {
+      speak(text);
+    }
+  };
 
   const navItems = [
     { path: "/", label: "Início", icon: Home },
@@ -24,7 +32,9 @@ const Navbar = () => {
           <Link 
             to="/" 
             className="flex items-center gap-2 font-bold text-xl text-primary hover:opacity-80 transition-opacity"
-            aria-label="Página inicial"
+            aria-label="Página inicial - EduIA Inclusiva"
+            onMouseEnter={() => handleLinkHover("Página inicial, EduIA Inclusiva")}
+            onFocus={() => handleLinkHover("Página inicial, EduIA Inclusiva")}
           >
             <BookOpen className="h-6 w-6" />
             <span>EduIA Inclusiva</span>
@@ -45,6 +55,9 @@ const Navbar = () => {
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
                     aria-current={isActive ? "page" : undefined}
+                    aria-label={`Ir para ${item.label}`}
+                    onMouseEnter={() => handleLinkHover(item.label)}
+                    onFocus={() => handleLinkHover(item.label)}
                   >
                     <Icon className="h-4 w-4" />
                     <span>{item.label}</span>
@@ -70,7 +83,9 @@ const Navbar = () => {
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                   aria-current={isActive ? "page" : undefined}
-                  aria-label={item.label}
+                  aria-label={`Ir para ${item.label}`}
+                  onMouseEnter={() => handleLinkHover(item.label)}
+                  onFocus={() => handleLinkHover(item.label)}
                 >
                   <Icon className="h-5 w-5" />
                   <span className="text-xs">{item.label}</span>
