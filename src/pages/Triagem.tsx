@@ -82,32 +82,54 @@ export default function Triagem() {
       const key = event.key;
 
       if (step === 1) {
-        if (key === '1') setFormat("texto");
-        else if (key === '2') setFormat("audio");
-        else if (key === '3') setFormat("video");
-        else if (key === '4') setFormat("interativo");
+        if (key === '1') {
+          setFormat("texto");
+          if (accessibilityProfile.ttsEnabled) speak("Texto selecionado. Pressione Enter para continuar.");
+        } else if (key === '2') {
+          setFormat("audio");
+          if (accessibilityProfile.ttsEnabled) speak("Áudio selecionado. Pressione Enter para continuar.");
+        } else if (key === '3') {
+          setFormat("video");
+          if (accessibilityProfile.ttsEnabled) speak("Vídeo selecionado. Pressione Enter para continuar.");
+        } else if (key === '4') {
+          setFormat("interativo");
+          if (accessibilityProfile.ttsEnabled) speak("Interativo selecionado. Pressione Enter para continuar.");
+        }
       } else if (step === 2) {
-        if (key === '1') setDifficulty("fácil");
-        else if (key === '2') setDifficulty("médio");
-        else if (key === '3') setDifficulty("difícil");
+        if (key === '1') {
+          setDifficulty("fácil");
+          if (accessibilityProfile.ttsEnabled) speak("Fácil selecionado. Pressione Enter para continuar.");
+        } else if (key === '2') {
+          setDifficulty("médio");
+          if (accessibilityProfile.ttsEnabled) speak("Médio selecionado. Pressione Enter para continuar.");
+        } else if (key === '3') {
+          setDifficulty("difícil");
+          if (accessibilityProfile.ttsEnabled) speak("Difícil selecionado. Pressione Enter para continuar.");
+        }
       } else if (step === 3) {
         if (key === '1') {
           setNeedsSupport(false);
+          if (accessibilityProfile.ttsEnabled) speak("Não preciso de adaptações. Pressione Enter para continuar.");
         } else if (key === '2') {
           setNeedsSupport(true);
           setSupportType("visual");
+          if (accessibilityProfile.ttsEnabled) speak("Visual selecionado. Pressione Enter para continuar.");
         } else if (key === '3') {
           setNeedsSupport(true);
           setSupportType("auditivo");
+          if (accessibilityProfile.ttsEnabled) speak("Auditivo selecionado. Pressione Enter para continuar.");
         } else if (key === '4') {
           setNeedsSupport(true);
           setSupportType("motor");
+          if (accessibilityProfile.ttsEnabled) speak("Motor selecionado. Pressione Enter para continuar.");
         } else if (key === '5') {
           setNeedsSupport(true);
           setSupportType("cognitivo");
+          if (accessibilityProfile.ttsEnabled) speak("Cognitivo selecionado. Pressione Enter para continuar.");
         } else if (key === '6') {
           setNeedsSupport(true);
           setSupportType("múltiplo");
+          if (accessibilityProfile.ttsEnabled) speak("Múltiplo selecionado. Pressione Enter para continuar.");
         }
       } else if (step === 4) {
         const interestMap: { [key: string]: string } = {
@@ -123,25 +145,27 @@ export default function Triagem() {
         if (interestMap[key]) {
           toggleInterest(interestMap[key]);
           if (accessibilityProfile.ttsEnabled) {
-            const isSelected = interests.includes(interestMap[key]);
-            speak(isSelected ? `${interestMap[key]} desmarcado` : `${interestMap[key]} marcado`);
+            const willBeSelected = !interests.includes(interestMap[key]);
+            speak(willBeSelected ? `${interestMap[key]} selecionado` : `${interestMap[key]} desmarcado`);
           }
         }
       }
 
-      // Navigate with Arrow keys
-      if (key === 'ArrowRight' && step < 4) {
-        setStep(step + 1);
+      // Navigate with Enter and Arrow Left
+      if (key === 'Enter') {
+        if (step < 4) {
+          setStep(step + 1);
+        } else {
+          handleComplete();
+        }
       } else if (key === 'ArrowLeft' && step > 1) {
         setStep(step - 1);
-      } else if (key === 'Enter' && step === 4) {
-        handleComplete();
       }
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [step, interests, accessibilityProfile.ttsEnabled, speak]);
+  }, [step, format, difficulty, needsSupport, supportType, interests, accessibilityProfile.ttsEnabled, speak]);
 
   const handleComplete = () => {
     updateProfile({
