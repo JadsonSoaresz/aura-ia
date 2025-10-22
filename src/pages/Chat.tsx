@@ -34,6 +34,7 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -41,6 +42,14 @@ export default function Chat() {
 
   useEffect(() => {
     scrollToBottom();
+    
+    // Speak the last assistant message
+    if (accessibilityProfile.ttsEnabled && messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage.role === "assistant") {
+        speak(lastMessage.content);
+      }
+    }
   }, [messages]);
 
   useEffect(() => {
@@ -112,6 +121,29 @@ export default function Chat() {
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInput(value);
+
+    // Clear previous timer
+    if (inputTimerRef.current) {
+      clearTimeout(inputTimerRef.current);
+    }
+
+    // Set new timer to speak after 2 seconds
+    if (accessibilityProfile.ttsEnabled && value.trim()) {
+      inputTimerRef.current = setTimeout(() => {
+        speak(`Você digitou: ${value}`);
+      }, 2000);
+    }
+  };
+
+  const handleSuggestionHover = (suggestion: string) => {
+    if (accessibilityProfile.ttsEnabled) {
+      speak(suggestion);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Navbar />
@@ -177,6 +209,7 @@ export default function Chat() {
                           variant="outline"
                           size="sm"
                           onClick={() => sendMessage(suggestion)}
+                          onMouseEnter={() => handleSuggestionHover(suggestion)}
                           disabled={loading}
                         >
                           {suggestion}
@@ -222,7 +255,7 @@ export default function Chat() {
             <div className="flex gap-2">
               <Input
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 placeholder="Digite sua pergunta..."
                 disabled={loading}
