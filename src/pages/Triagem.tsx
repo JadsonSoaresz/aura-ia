@@ -17,14 +17,7 @@ export default function Triagem() {
   const { updateProfile } = useSessionProfile();
   const { speak, profile: accessibilityProfile } = useAccessibility();
 
-  useEffect(() => {
-    if (accessibilityProfile.ttsEnabled) {
-      const timer = setTimeout(() => {
-        speak("Página de personalização de perfil. Aqui você responderá algumas perguntas para personalizarmos sua experiência de aprendizado, incluindo formato preferido, nível de dificuldade, necessidades de acessibilidade e áreas de interesse.");
-      }, 800);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  // State declarations
   const [step, setStep] = useState(1);
   const [format, setFormat] = useState<LearningFormat>("texto");
   const [difficulty, setDifficulty] = useState<DifficultyLevel>("médio");
@@ -42,6 +35,114 @@ export default function Triagem() {
     "Música"
   ];
 
+  const toggleInterest = (interest: string) => {
+    setInterests(prev =>
+      prev.includes(interest)
+        ? prev.filter(i => i !== interest)
+        : [...prev, interest]
+    );
+  };
+
+  // Initial page announcement
+  useEffect(() => {
+    if (accessibilityProfile.ttsEnabled) {
+      const timer = setTimeout(() => {
+        speak("Página de personalização de perfil. Aqui você responderá algumas perguntas para personalizarmos sua experiência de aprendizado, incluindo formato preferido, nível de dificuldade, necessidades de acessibilidade e áreas de interesse.");
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // Speak questions and options when step changes
+  useEffect(() => {
+    if (!accessibilityProfile.ttsEnabled) return;
+
+    const timer = setTimeout(() => {
+      let message = "";
+      
+      if (step === 1) {
+        message = "Pergunta 1 de 4: Formato de Aprendizado. Como você prefere consumir conteúdos educacionais? Pressione 1 para Texto, 2 para Áudio, 3 para Vídeo, ou 4 para Interativo.";
+      } else if (step === 2) {
+        message = "Pergunta 2 de 4: Nível de Dificuldade. Qual nível você se sente mais confortável começando? Pressione 1 para Fácil, 2 para Médio, ou 3 para Difícil.";
+      } else if (step === 3) {
+        message = "Pergunta 3 de 4: Necessidades de Acessibilidade. Você precisa de adaptações especiais? Pressione 1 para Não preciso, 2 para Visual, 3 para Auditivo, 4 para Motor, 5 para Cognitivo, ou 6 para Múltiplo.";
+      } else if (step === 4) {
+        message = "Pergunta 4 de 4: Áreas de Interesse. Selecione os temas que você gostaria de aprender. Pressione os números de 1 a 7 para selecionar: 1 para Tecnologia, 2 para Matemática, 3 para Ciências, 4 para História, 5 para Idiomas, 6 para Arte, 7 para Música. Pressione Enter para continuar.";
+      }
+      
+      speak(message);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [step, accessibilityProfile.ttsEnabled, speak]);
+
+  // Keyboard navigation for answering
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      const key = event.key;
+
+      if (step === 1) {
+        if (key === '1') setFormat("texto");
+        else if (key === '2') setFormat("audio");
+        else if (key === '3') setFormat("video");
+        else if (key === '4') setFormat("interativo");
+      } else if (step === 2) {
+        if (key === '1') setDifficulty("fácil");
+        else if (key === '2') setDifficulty("médio");
+        else if (key === '3') setDifficulty("difícil");
+      } else if (step === 3) {
+        if (key === '1') {
+          setNeedsSupport(false);
+        } else if (key === '2') {
+          setNeedsSupport(true);
+          setSupportType("visual");
+        } else if (key === '3') {
+          setNeedsSupport(true);
+          setSupportType("auditivo");
+        } else if (key === '4') {
+          setNeedsSupport(true);
+          setSupportType("motor");
+        } else if (key === '5') {
+          setNeedsSupport(true);
+          setSupportType("cognitivo");
+        } else if (key === '6') {
+          setNeedsSupport(true);
+          setSupportType("múltiplo");
+        }
+      } else if (step === 4) {
+        const interestMap: { [key: string]: string } = {
+          '1': 'Tecnologia',
+          '2': 'Matemática',
+          '3': 'Ciências',
+          '4': 'História',
+          '5': 'Idiomas',
+          '6': 'Arte',
+          '7': 'Música'
+        };
+        
+        if (interestMap[key]) {
+          toggleInterest(interestMap[key]);
+          if (accessibilityProfile.ttsEnabled) {
+            const isSelected = interests.includes(interestMap[key]);
+            speak(isSelected ? `${interestMap[key]} desmarcado` : `${interestMap[key]} marcado`);
+          }
+        }
+      }
+
+      // Navigate with Arrow keys
+      if (key === 'ArrowRight' && step < 4) {
+        setStep(step + 1);
+      } else if (key === 'ArrowLeft' && step > 1) {
+        setStep(step - 1);
+      } else if (key === 'Enter' && step === 4) {
+        handleComplete();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [step, interests, accessibilityProfile.ttsEnabled, speak]);
+
   const handleComplete = () => {
     updateProfile({
       format,
@@ -52,14 +153,6 @@ export default function Triagem() {
     });
     toast.success("Perfil configurado com sucesso!");
     navigate("/aprender");
-  };
-
-  const toggleInterest = (interest: string) => {
-    setInterests(prev =>
-      prev.includes(interest)
-        ? prev.filter(i => i !== interest)
-        : [...prev, interest]
-    );
   };
 
   return (
