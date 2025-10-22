@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useAccessibility } from "@/contexts/AccessibilityContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -14,6 +15,16 @@ import { toast } from "sonner";
 export default function Triagem() {
   const navigate = useNavigate();
   const { updateProfile } = useSessionProfile();
+  const { speak, profile: accessibilityProfile } = useAccessibility();
+
+  useEffect(() => {
+    if (accessibilityProfile.ttsEnabled) {
+      const timer = setTimeout(() => {
+        speak("Página de personalização de perfil. Aqui você responderá algumas perguntas para personalizarmos sua experiência de aprendizado, incluindo formato preferido, nível de dificuldade, necessidades de acessibilidade e áreas de interesse.");
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, []);
   const [step, setStep] = useState(1);
   const [format, setFormat] = useState<LearningFormat>("texto");
   const [difficulty, setDifficulty] = useState<DifficultyLevel>("médio");

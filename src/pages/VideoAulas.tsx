@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAccessibility } from "@/contexts/AccessibilityContext";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import { VIDEO_LIBRARY, getAllSubjects, getVideosBySubject, VideoLesson } from "@/lib/videoLibrary";
@@ -7,8 +8,18 @@ import { Play, Clock, BookOpen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export default function VideoAulas() {
+  const { speak, profile: accessibilityProfile } = useAccessibility();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<VideoLesson | null>(null);
+
+  useEffect(() => {
+    if (accessibilityProfile.ttsEnabled && !selectedVideo) {
+      const timer = setTimeout(() => {
+        speak("Página de vídeo aulas. Aqui você encontra uma coleção de vídeos educacionais organizados por matéria. Você pode filtrar por assunto e assistir vídeos sobre diversos tópicos de aprendizado.");
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedVideo]);
 
   const subjects = getAllSubjects();
   const displayedVideos = selectedSubject 

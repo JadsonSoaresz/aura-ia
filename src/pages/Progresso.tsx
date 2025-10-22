@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useAccessibility } from "@/contexts/AccessibilityContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import Navbar from "@/components/Navbar";
@@ -12,11 +13,19 @@ import { toast } from "sonner";
 
 export default function Progresso() {
   const { profile, history } = useSessionProfile();
+  const { speak, profile: accessibilityProfile } = useAccessibility();
   const [analysis, setAnalysis] = useState<PerformanceAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadAnalysis();
+    
+    if (accessibilityProfile.ttsEnabled) {
+      const timer = setTimeout(() => {
+        speak("Página de progresso. Aqui você acompanha sua evolução no aprendizado, visualizando estatísticas detalhadas como desempenho médio, número de atividades concluídas, tempo total de estudo, análise de desempenho por tópico e insights gerados por inteligência artificial.");
+      }, 800);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const loadAnalysis = async () => {

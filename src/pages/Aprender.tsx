@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useAccessibility } from "@/contexts/AccessibilityContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import { useSessionProfile } from "@/hooks/useSessionProfile";
@@ -12,6 +13,7 @@ import { Link } from "react-router-dom";
 
 export default function Aprender() {
   const { profile, history, addActivity } = useSessionProfile();
+  const { speak, profile: accessibilityProfile } = useAccessibility();
   const [recommendation, setRecommendation] = useState<ContentRecommendation | null>(null);
   const [currentContent, setCurrentContent] = useState<LearningContent | null>(null);
   const [loading, setLoading] = useState(false);
@@ -20,6 +22,13 @@ export default function Aprender() {
 
   useEffect(() => {
     loadRecommendation();
+    
+    if (accessibilityProfile.ttsEnabled) {
+      const timer = setTimeout(() => {
+        speak("Página de aprendizado. Aqui você encontra conteúdos personalizados com base no seu perfil, incluindo recomendações feitas por inteligência artificial e uma biblioteca completa de materiais educacionais em diversos formatos.");
+      }, 800);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const loadRecommendation = async () => {

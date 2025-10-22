@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { 
   Brain, 
   Heart, 
@@ -16,6 +17,15 @@ import { useAccessibility } from "@/contexts/AccessibilityContext";
 
 export default function Landing() {
   const { speak, profile } = useAccessibility();
+
+  useEffect(() => {
+    if (profile.ttsEnabled) {
+      const timer = setTimeout(() => {
+        speak("Página inicial. Bem-vindo à plataforma de aprendizado adaptativo. Aqui você encontra informações sobre nossa plataforma, os problemas que resolvemos e as soluções que oferecemos para educação inclusiva.");
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleButtonHover = (text: string) => {
     if (profile.ttsEnabled) {

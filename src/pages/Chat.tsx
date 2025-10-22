@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useAccessibility } from "@/contexts/AccessibilityContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
@@ -18,6 +19,7 @@ interface Message {
 
 export default function Chat() {
   const { profile } = useSessionProfile();
+  const { speak, profile: accessibilityProfile } = useAccessibility();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -40,6 +42,15 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    if (accessibilityProfile.ttsEnabled) {
+      const timer = setTimeout(() => {
+        speak("Página de chat de apoio. Aqui você pode tirar suas dúvidas com nosso tutor virtual inteligente. Digite suas perguntas e receba respostas personalizadas com sugestões de tópicos relacionados.");
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const sendMessage = async (messageText?: string) => {
     const textToSend = messageText || input.trim();
