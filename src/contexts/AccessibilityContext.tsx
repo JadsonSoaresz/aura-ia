@@ -95,7 +95,7 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
           const headings = mainContent.querySelectorAll('h1, h2');
           const firstHeading = headings[0]?.textContent;
           if (firstHeading) {
-            speak(`Página carregada. ${firstHeading}. Pressione Alt H para ouvir os atalhos de teclado.`);
+            speak(`Página carregada. ${firstHeading}.`);
           }
         }
       }, 500);

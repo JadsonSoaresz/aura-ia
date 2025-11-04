@@ -205,12 +205,7 @@ export const AccessibilityToolbar = () => {
             onClick={handleHelp}
             onMouseEnter={() => profile.ttsEnabled && speak("Ouvir ajuda e atalhos")}
           >
-            Ouvir Ajuda (Alt+H)
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onMouseEnter={() => profile.ttsEnabled && speak("Atalhos de teclado")}
-          >
-            Atalhos de Teclado
+            Ouvir Ajuda
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

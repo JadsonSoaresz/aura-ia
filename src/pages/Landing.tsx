@@ -39,7 +39,7 @@ export default function Landing() {
       <Navbar />
       
       <main className="container mx-auto px-4 py-12">
-        <section className="text-center mb-16 pt-8">
+        <section className="text-center mb-16 pt-8" tabIndex={0}>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
             Educação Inclusiva e Personalizada
           </h1>
@@ -76,7 +76,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="grid md:grid-cols-3 gap-6 mb-16">
+        <section className="grid md:grid-cols-3 gap-6 mb-16" tabIndex={0}>
           <Card 
             className="border-2 hover:border-primary transition-colors"
             onMouseEnter={() => profile.ttsEnabled && speak("IA Personalizada. Conteúdo adaptado ao seu perfil, estilo de aprendizado e necessidades especiais")}
@@ -117,7 +117,7 @@ export default function Landing() {
           </Card>
         </section>
 
-        <section className="mb-16">
+        <section className="mb-16" tabIndex={0}>
           <h2 className="text-3xl font-bold text-center mb-8">
             Recursos da Plataforma
           </h2>
@@ -196,7 +196,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="text-center bg-card rounded-lg p-8 shadow-soft">
+        <section className="text-center bg-card rounded-lg p-8 shadow-soft" tabIndex={0}>
           <h2 className="text-3xl font-bold mb-4">
             Pronto para começar sua jornada?
           </h2>
