@@ -42,8 +42,11 @@ export default function Landing() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
             Educação Inclusiva e Personalizada
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto">
             Aprenda no seu ritmo, do seu jeito. Tecnologia de IA que se adapta às suas necessidades.
+          </p>
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            A união que transforma o aprendizado
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
