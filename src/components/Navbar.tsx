@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, ClipboardList, BookOpen, MessageSquare, TrendingUp, Video } from "lucide-react";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
+import inclutechLogo from "@/assets/inclutech-logo.jpg";
 
 const Navbar = () => {
   const location = useLocation();
@@ -32,12 +33,12 @@ const Navbar = () => {
           <Link 
             to="/" 
             className="flex items-center gap-2 font-bold text-xl text-primary hover:opacity-80 transition-opacity"
-            aria-label="Página inicial - EduIA Inclusiva"
-            onMouseEnter={() => handleLinkHover("Página inicial, EduIA Inclusiva")}
-            onFocus={() => handleLinkHover("Página inicial, EduIA Inclusiva")}
+            aria-label="Página inicial - INCLUTECH"
+            onMouseEnter={() => handleLinkHover("Página inicial, INCLUTECH")}
+            onFocus={() => handleLinkHover("Página inicial, INCLUTECH")}
           >
-            <BookOpen className="h-6 w-6" />
-            <span>EduIA Inclusiva</span>
+            <img src={inclutechLogo} alt="INCLUTECH Logo" className="h-8 w-8 object-contain" />
+            <span>INCLUTECH</span>
           </Link>
 
           <ul className="hidden md:flex items-center gap-1">

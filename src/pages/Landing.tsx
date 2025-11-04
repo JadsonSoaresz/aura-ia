@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
+import inclutechLogo from "@/assets/inclutech-logo.jpg";
 
 export default function Landing() {
   const { speak, profile } = useAccessibility();
@@ -159,7 +160,7 @@ export default function Landing() {
 
             <Card onMouseEnter={() => profile.ttsEnabled && speak("Múltiplos Formatos. Texto, áudio, vídeo e atividades interativas adaptadas para você")}>
               <CardHeader>
-                <BookOpen className="h-8 w-8 mb-2 text-primary" />
+                <img src={inclutechLogo} alt="Múltiplos Formatos" className="h-8 w-8 mb-2 object-contain" />
                 <CardTitle>Múltiplos Formatos</CardTitle>
               </CardHeader>
               <CardContent>
