@@ -34,6 +34,8 @@ export default function Aprender() {
   const loadRecommendation = async () => {
     setLoading(true);
     try {
+      console.log("Carregando recomendação...", { profile, historyLength: history.length });
+      
       const { data, error } = await supabase.functions.invoke("recommend", {
         body: {
           sessionProfile: profile,
@@ -41,11 +43,22 @@ export default function Aprender() {
         },
       });
 
-      if (error) throw error;
-      setRecommendation(data);
-    } catch (error) {
+      console.log("Resposta da recomendação:", { data, error });
+
+      if (error) {
+        console.error("Erro ao invocar função:", error);
+        throw error;
+      }
+      
+      if (data) {
+        setRecommendation(data);
+        console.log("Recomendação carregada com sucesso:", data);
+      }
+    } catch (error: any) {
       console.error("Error loading recommendation:", error);
-      toast.error("Erro ao carregar recomendação");
+      toast.error("Erro ao carregar recomendação: " + (error.message || "Tente novamente"));
+      // Set loading to false even on error
+      setLoading(false);
     } finally {
       setLoading(false);
     }
