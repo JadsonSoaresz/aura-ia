@@ -76,6 +76,8 @@ export default function Chat() {
         content: m.content
       }));
 
+      console.log("Enviando mensagem para chat...", { message: textToSend });
+
       const { data, error } = await supabase.functions.invoke("chat", {
         body: {
           message: textToSend,
@@ -84,7 +86,12 @@ export default function Chat() {
         },
       });
 
-      if (error) throw error;
+      console.log("Resposta do chat:", { data, error });
+
+      if (error) {
+        console.error("Erro ao invocar função de chat:", error);
+        throw error;
+      }
 
       const assistantMessage: Message = {
         role: "assistant",
@@ -94,6 +101,7 @@ export default function Chat() {
       };
 
       setMessages(prev => [...prev, assistantMessage]);
+      console.log("Mensagem adicionada com sucesso");
     } catch (error: any) {
       console.error("Error sending message:", error);
       
