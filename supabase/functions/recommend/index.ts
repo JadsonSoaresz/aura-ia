@@ -28,8 +28,13 @@ Perfil do aluno:
 - Nível atual: ${sessionProfile.difficulty || "médio"}
 - Interesses: ${sessionProfile.interests?.join(", ") || "geral"}
 
+Regras IMPORTANTES para a recomendação:
+- Se a lista de interesses NÃO estiver vazia, o campo "topic" DEVE corresponder exatamente a um dos interesses informados.
+- Se não houver interesses definidos, escolha um tópico geral adequado ao nível do aluno.
+- Considere também o histórico recente para ajustar a dificuldade.
+
 Histórico recente (últimos ${history?.length || 0} conteúdos):
-${history?.map((h: any) => `- ${h.title} (acertos: ${h.score}%, tempo: ${h.timeSpent}min)`).join("\n") || "Nenhum histórico"}
+${history?.map((h: any) => `- ${h.title} (tópico: ${h.topic}, acertos: ${h.score}%, tempo: ${h.timeSpent}min)`).join("\n") || "Nenhum histórico"}
 
 Tarefa: Recomende o próximo conteúdo educacional ideal para este aluno.
 
@@ -38,7 +43,7 @@ Retorne APENAS um objeto JSON com a seguinte estrutura:
   "title": "Título do conteúdo",
   "format": "texto|audio|video|interativo",
   "difficulty": "fácil|médio|difícil",
-  "topic": "Tópico principal",
+  "topic": "Tópico principal (deve respeitar as regras acima)",
   "duration": "Duração em minutos (número)",
   "reason": "Breve explicação da recomendação (máximo 100 caracteres)",
   "adaptations": ["Lista de adaptações de acessibilidade aplicadas"]
