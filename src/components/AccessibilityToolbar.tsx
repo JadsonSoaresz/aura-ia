@@ -85,7 +85,7 @@ export const AccessibilityToolbar = () => {
 
   return (
     <div 
-      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex gap-2 bg-card/95 backdrop-blur-sm p-3 rounded-lg shadow-glow border-2"
+      className="fixed left-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 bg-card/95 backdrop-blur-sm p-3 rounded-lg shadow-glow border-2"
       role="toolbar"
       aria-label="Barra de ferramentas de acessibilidade"
     >
