@@ -37,7 +37,7 @@ const Navbar = () => {
             onMouseEnter={() => handleLinkHover("Página inicial, Aura.ia")}
             onFocus={() => handleLinkHover("Página inicial, Aura.ia")}
           >
-            <img src={auraLogo} alt="Aura.ia Logo" className="h-10 object-contain" />
+            <img src={auraLogo} alt="Aura.ia Logo" className="h-16 object-contain" />
           </Link>
 
           <ul className="hidden md:flex items-center gap-1">
