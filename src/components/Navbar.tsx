@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, ClipboardList, BookOpen, MessageSquare, TrendingUp, Video } from "lucide-react";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
-import inclutechLogo from "@/assets/inclutech-logo.jpg";
+import auraLogo from "@/assets/aura-logo.png";
 
 const Navbar = () => {
   const location = useLocation();
@@ -32,13 +32,12 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <Link 
             to="/" 
-            className="flex items-center gap-2 font-bold text-xl text-primary hover:opacity-80 transition-opacity"
-            aria-label="Página inicial - INCLUTECH"
-            onMouseEnter={() => handleLinkHover("Página inicial, INCLUTECH")}
-            onFocus={() => handleLinkHover("Página inicial, INCLUTECH")}
+            className="flex items-center hover:opacity-80 transition-opacity"
+            aria-label="Página inicial - Aura.ia"
+            onMouseEnter={() => handleLinkHover("Página inicial, Aura.ia")}
+            onFocus={() => handleLinkHover("Página inicial, Aura.ia")}
           >
-            <img src={inclutechLogo} alt="INCLUTECH Logo" className="h-8 w-8 object-contain" />
-            <span>INCLUTECH</span>
+            <img src={auraLogo} alt="Aura.ia Logo" className="h-10 object-contain" />
           </Link>
 
           <ul className="hidden md:flex items-center gap-1">
