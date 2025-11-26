@@ -25,38 +25,51 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY não configurada");
     }
 
-    const systemPrompt = `Você é um gerador de perguntas educacionais especializado em criar desafios de alto nível. Crie perguntas de múltipla escolha sobre o tópico fornecido.
+    const systemPrompt = `Você é um gerador de perguntas educacionais especializado em criar questões desafiadoras de nível médio a avançado. Crie perguntas de múltipla escolha sobre o tópico fornecido.
 
 IMPORTANTE: Retorne exatamente 5 perguntas em português.
 Nível de dificuldade: ${difficulty}
 Tópico: ${topic}
 Título do conteúdo: ${title}
 
-DIRETRIZES PARA CRIAR QUESTÕES DESAFIADORAS:
+DIRETRIZES CRÍTICAS PARA QUESTÕES DE NÍVEL MÉDIO:
+- NUNCA faça perguntas simples de memorização
+- SEMPRE exija aplicação prática de conceitos
+- Inclua cenários hipotéticos que testem raciocínio
+- Use comparações entre conceitos relacionados
+- Exija identificação de causas e consequências
+- Todas as alternativas incorretas devem ser plausíveis e tentadoras
+- Faça o aluno pensar em MÚLTIPLAS ETAPAS para chegar à resposta
 
 Para dificuldade FÁCIL:
-- Perguntas diretas sobre conceitos básicos
-- Exigem memorização e compreensão simples
-- Opções de resposta bem distintas
+- Perguntas diretas sobre conceitos fundamentais
+- Exigem reconhecimento e compreensão básica
+- Opções de resposta nitidamente distintas
 
-Para dificuldade MÉDIA:
-- Exigem aplicação de conceitos
-- Análise de situações práticas
-- Distratores (opções incorretas) plausíveis que testam compreensão real
+Para dificuldade MÉDIA (ATENÇÃO ESPECIAL):
+- Exigem APLICAÇÃO prática e análise de situações complexas
+- Incluem cenários do mundo real ou casos hipotéticos
+- Testam RELAÇÕES entre conceitos, não apenas definições
+- Exigem comparação, contraste ou síntese de informações
+- Distratores muito convincentes baseados em conceitos semelhantes
+- Perguntas do tipo: "Por que X acontece quando Y?", "Qual a melhor abordagem para resolver Z?", "Como X se relaciona com Y?"
+- NÃO aceite perguntas como "Quanto é X + Y?" - isso é FÁCIL demais
 
 Para dificuldade DIFÍCIL:
-- Exigem análise crítica e raciocínio complexo
-- Síntese de múltiplos conceitos
-- Distratores muito próximos da resposta correta
-- Podem incluir pegadinhas sutis ou exceções às regras
-- Exigem conhecimento aprofundado do tema
+- Exigem análise crítica profunda e raciocínio complexo multi-etapa
+- Síntese de múltiplos conceitos avançados
+- Distratores extremamente próximos da resposta correta
+- Incluem exceções, casos especiais e pegadinhas sutis
+- Exigem conhecimento especializado e capacidade de fazer inferências
 
-TODAS as perguntas devem:
-- Ser claras e bem formuladas
-- Ter exatamente 4 opções de resposta
-- Ter apenas UMA resposta correta
-- Testar compreensão real, não apenas memorização
-- Ter distratores convincentes que reflitam erros comuns de raciocínio`;
+VALIDAÇÃO DAS QUESTÕES:
+Antes de gerar, verifique:
+✓ A pergunta exige mais de uma etapa de raciocínio?
+✓ Pelo menos 2 alternativas incorretas parecem plausíveis?
+✓ É possível acertar sem apenas decorar fatos básicos?
+✓ A pergunta testa COMPREENSÃO e não apenas MEMORIZAÇÃO?
+
+Se alguma resposta for "não", a questão precisa ser mais desafiadora.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
