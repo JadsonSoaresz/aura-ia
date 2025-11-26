@@ -124,6 +124,20 @@ Se alguma resposta for "não", a questão precisa ser mais desafiadora.`;
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Erro na API do Lovable AI:", response.status, errorText);
+      
+      if (response.status === 429) {
+        return new Response(
+          JSON.stringify({ 
+            error: "Limite de requisições atingido. Por favor, aguarde alguns segundos antes de tentar novamente.",
+            questions: []
+          }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            status: 200, // Retorna 200 para não quebrar o fluxo do frontend
+          },
+        );
+      }
+      
       throw new Error(`Erro na API: ${response.status}`);
     }
 
