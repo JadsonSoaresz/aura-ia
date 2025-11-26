@@ -25,18 +25,38 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY não configurada");
     }
 
-    const systemPrompt = `Você é um gerador de perguntas educacionais. Crie perguntas de múltipla escolha sobre o tópico fornecido.
+    const systemPrompt = `Você é um gerador de perguntas educacionais especializado em criar desafios de alto nível. Crie perguntas de múltipla escolha sobre o tópico fornecido.
 
 IMPORTANTE: Retorne exatamente 5 perguntas em português.
 Nível de dificuldade: ${difficulty}
 Tópico: ${topic}
 Título do conteúdo: ${title}
 
-As perguntas devem:
-- Ser claras e diretas
-- Ter 4 opções de resposta
-- Ter apenas uma resposta correta
-- Ser adequadas ao nível de dificuldade especificado`;
+DIRETRIZES PARA CRIAR QUESTÕES DESAFIADORAS:
+
+Para dificuldade FÁCIL:
+- Perguntas diretas sobre conceitos básicos
+- Exigem memorização e compreensão simples
+- Opções de resposta bem distintas
+
+Para dificuldade MÉDIA:
+- Exigem aplicação de conceitos
+- Análise de situações práticas
+- Distratores (opções incorretas) plausíveis que testam compreensão real
+
+Para dificuldade DIFÍCIL:
+- Exigem análise crítica e raciocínio complexo
+- Síntese de múltiplos conceitos
+- Distratores muito próximos da resposta correta
+- Podem incluir pegadinhas sutis ou exceções às regras
+- Exigem conhecimento aprofundado do tema
+
+TODAS as perguntas devem:
+- Ser claras e bem formuladas
+- Ter exatamente 4 opções de resposta
+- Ter apenas UMA resposta correta
+- Testar compreensão real, não apenas memorização
+- Ter distratores convincentes que reflitam erros comuns de raciocínio`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",

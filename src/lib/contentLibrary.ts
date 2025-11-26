@@ -83,6 +83,149 @@ Vamos começar devagar e construir seu conhecimento passo a passo!`
     duration: 15,
     tags: ["inglês", "idiomas", "iniciante"],
     content: "Lições de vocabulário básico em inglês"
+  },
+  {
+    id: "6",
+    title: "Geografia Mundial: Continentes e Oceanos",
+    description: "Explore a geografia do nosso planeta",
+    format: "texto",
+    difficulty: "médio",
+    topic: "Geografia",
+    duration: 22,
+    tags: ["geografia", "mundo", "mapas"],
+    content: "Estudo completo sobre continentes, oceanos e características geográficas"
+  },
+  {
+    id: "7",
+    title: "Física Quântica Introdutória",
+    description: "Conceitos fundamentais de física moderna",
+    format: "video",
+    difficulty: "difícil",
+    topic: "Física",
+    duration: 35,
+    tags: ["física", "quântica", "avançado"],
+    content: "Introdução aos princípios da mecânica quântica"
+  },
+  {
+    id: "8",
+    title: "Química Orgânica Avançada",
+    description: "Estruturas moleculares e reações químicas complexas",
+    format: "texto",
+    difficulty: "difícil",
+    topic: "Química",
+    duration: 40,
+    tags: ["química", "orgânica", "moléculas"],
+    content: "Estudo aprofundado de compostos orgânicos e suas reações"
+  },
+  {
+    id: "9",
+    title: "Literatura Brasileira: Machado de Assis",
+    description: "Análise crítica das obras de Machado de Assis",
+    format: "texto",
+    difficulty: "difícil",
+    topic: "Literatura",
+    duration: 30,
+    tags: ["literatura", "brasil", "análise"],
+    content: "Estudo detalhado das principais obras e estilo literário machadiano"
+  },
+  {
+    id: "10",
+    title: "Filosofia: Pensadores Clássicos",
+    description: "Das ideias de Platão a Aristóteles",
+    format: "audio",
+    difficulty: "médio",
+    topic: "Filosofia",
+    duration: 28,
+    tags: ["filosofia", "história", "pensamento"],
+    content: "Exploração das principais correntes filosóficas clássicas"
+  },
+  {
+    id: "11",
+    title: "Arte Renascentista",
+    description: "Mestres da pintura e escultura do Renascimento",
+    format: "video",
+    difficulty: "médio",
+    topic: "Arte",
+    duration: 25,
+    tags: ["arte", "história", "renascimento"],
+    content: "Análise das obras de Leonardo da Vinci, Michelangelo e Rafael"
+  },
+  {
+    id: "12",
+    title: "Economia: Sistemas Econômicos",
+    description: "Capitalismo, socialismo e economia mista",
+    format: "texto",
+    difficulty: "difícil",
+    topic: "Economia",
+    duration: 32,
+    tags: ["economia", "sistemas", "política"],
+    content: "Análise comparativa dos principais sistemas econômicos"
+  },
+  {
+    id: "13",
+    title: "Biologia Celular Avançada",
+    description: "Processos celulares e genética molecular",
+    format: "interativo",
+    difficulty: "difícil",
+    topic: "Biologia",
+    duration: 38,
+    tags: ["biologia", "células", "genética"],
+    content: "Estudo aprofundado de processos celulares e DNA"
+  },
+  {
+    id: "14",
+    title: "Astronomia: O Sistema Solar",
+    description: "Planetas, luas e outros corpos celestes",
+    format: "video",
+    difficulty: "médio",
+    topic: "Astronomia",
+    duration: 27,
+    tags: ["astronomia", "espaço", "planetas"],
+    content: "Exploração completa do nosso sistema solar"
+  },
+  {
+    id: "15",
+    title: "Espanhol Intermediário",
+    description: "Conversação e gramática avançada",
+    format: "audio",
+    difficulty: "médio",
+    topic: "Idiomas",
+    duration: 23,
+    tags: ["espanhol", "idiomas", "intermediário"],
+    content: "Aulas de conversação e gramática em nível intermediário"
+  },
+  {
+    id: "16",
+    title: "História da Arte Contemporânea",
+    description: "Movimentos artísticos do século XX",
+    format: "texto",
+    difficulty: "difícil",
+    topic: "Arte",
+    duration: 33,
+    tags: ["arte", "contemporânea", "movimentos"],
+    content: "Análise crítica dos principais movimentos artísticos modernos"
+  },
+  {
+    id: "17",
+    title: "Matemática: Cálculo Diferencial",
+    description: "Fundamentos de derivadas e integrais",
+    format: "texto",
+    difficulty: "difícil",
+    topic: "Matemática",
+    duration: 45,
+    tags: ["matemática", "cálculo", "avançado"],
+    content: "Introdução ao cálculo diferencial e integral"
+  },
+  {
+    id: "18",
+    title: "Sociologia: Estruturas Sociais",
+    description: "Compreendendo as dinâmicas da sociedade",
+    format: "audio",
+    difficulty: "médio",
+    topic: "Sociologia",
+    duration: 26,
+    tags: ["sociologia", "sociedade", "cultura"],
+    content: "Estudo das estruturas e relações sociais"
   }
 ];
 
