@@ -97,12 +97,27 @@ export default function Aprender() {
       });
 
       if (error) throw error;
-      if (data?.questions) {
+      
+      if (data?.error) {
+        if (data.error.includes("429") || data.error.includes("rate")) {
+          toast.error("Muitas requisições no momento. Por favor, aguarde alguns segundos e tente novamente.");
+        } else {
+          toast.error(data.error || "Erro ao gerar perguntas. Tente novamente.");
+        }
+        setCurrentContent(null);
+        return;
+      }
+      
+      if (data?.questions && data.questions.length > 0) {
         setQuestions(data.questions);
+      } else {
+        toast.error("Nenhuma pergunta foi gerada. Tente novamente.");
+        setCurrentContent(null);
       }
     } catch (error) {
       console.error("Erro ao carregar perguntas:", error);
-      toast.error("Erro ao carregar perguntas. Tente novamente.");
+      toast.error("Erro ao carregar perguntas. Por favor, tente novamente em alguns instantes.");
+      setCurrentContent(null);
     } finally {
       setLoadingQuestions(false);
     }
